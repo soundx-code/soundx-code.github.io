@@ -1,0 +1,535 @@
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+  <title>Wave-share: serverless, peer-to-peer, local file sharing through sound | C++ and stuff</title>
+  <meta name="generator" content="Jekyll v3.9.0">
+  <meta property="og:title" content="Wave-share: serverless, peer-to-peer, local file sharing through sound">
+  <meta property="og:locale" content="en_US">
+  <meta name="description" content="Peer-to-peer file sharing using WebRTC. Signaling is performed through sound. No server-side is required. Make sure to unplug your headphones and allow microphone capture on this page. Watch a tutorial here.">
+  <meta property="og:description" content="Peer-to-peer file sharing using WebRTC. Signaling is performed through sound. No server-side is required. Make sure to unplug your headphones and allow microphone capture on this page. Watch a tutorial here.">
+  <link rel="canonical" href="/wave-share">
+  <meta property="og:url" content="/wave-share">
+  <meta property="og:site_name" content="C++ and stuff">
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2018-04-13T07:30:17+00:00">
+  <meta name="twitter:card" content="summary">
+  <meta property="twitter:title" content="Wave-share: serverless, peer-to-peer, local file sharing through sound">
+  <script type="application/ld+json">
+  {"description":"Peer-to-peer file sharing using WebRTC. Signaling is performed through sound. No server-side is required. Make sure to unplug your headphones and allow microphone capture on this page. Watch a tutorial here.","url":"/wave-share","headline":"Wave-share: serverless, peer-to-peer, local file sharing through sound","@type":"BlogPosting","datePublished":"2018-04-13T07:30:17+00:00","dateModified":"2018-04-13T07:30:17+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"/wave-share"},"@context":"https://schema.org"}</script>
+  <!-- End Jekyll SEO tag -->
+  <link rel="stylesheet" href="./assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="C++ and stuff"></head>
+  <body><header class="site-header" role="banner">
+  
+    <div class="wrapper"><a class="site-title" rel="author" href="/">C++ and stuff</a><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+  
+          <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+        </nav></div>
+  </header>
+  <main class="page-content" aria-label="Content">
+        <div class="wrapper">
+          <article class="post h-entry" itemscope="" itemtype="http://schema.org/BlogPosting">
+  
+      <header class="post-header">
+          <h1 class="post-title p-name" itemprop="name headline">Wave-share: serverless, peer-to-peer, local file sharing through sound</h1>
+          <p class="post-meta">
+          <time class="dt-published" datetime="2018-04-13T07:30:17+00:00" itemprop="datePublished">
+              
+              Apr 13, 2018
+          </time>
+          </p>
+  
+          <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css">
+      </header>
+  
+      <div class="post-content e-content" itemprop="articleBody">
+          <p>Peer-to-peer file sharing using WebRTC. Signaling is performed through sound.
+  No server-side is required. Make sure to unplug your headphones and allow
+  microphone capture on this page. Watch a tutorial
+  <a href="https://youtu.be/d30QDrKyQkg">here</a>.</p>
+  
+  <p><i><b>Updated:</b> 29 Nov 2020</i><br>
+  For basic text transmission through sound, please checkout my <a href="/jekyll/update/2018/05/31/data-over-sound-2.html">blog post about data-over-sound</a>.</p>
+  
+      </div>
+  
+      
+          <div id="main-container">
+  
+      <section>
+          <div id="sound"></div>
+  
+          <table>
+              <tbody><tr>
+                  <td colspan="4" align="center">
+                      <button onclick="doInit()" id="butInit">Init</button>
+                  </td>
+              </tr>
+              <tr>
+                  <td colspan="4" align="center">
+                      <div class="led-box">
+                          <p>Output:</p>
+                      </div>
+                      <div class="led-box">
+                          <p>Capture:</p>
+                      </div>
+                      <div class="led-box">
+                          <p>Browser:</p>
+                      </div>
+                      <div class="led-box">
+                          <p>WebRTC:</p>
+                      </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td colspan="4" align="center">
+                      <div class="led-box" id="has-device-output" title="Indicates if an audio output device is available">
+                          <div class="led-yellow"></div>
+                      </div>
+                      <div class="led-box" id="has-device-capture" title="Indicates if an audio capture device is available. Make sure this page has access to the microphone">
+                          <div class="led-yellow"></div>
+                      </div>
+                      <div class="led-box" id="is-browser-supported" title="Indicates if the browser is supported">
+                          <div class="led-yellow"></div>
+                      </div>
+                      <div class="led-box" id="is-webrtc-supported" title="Indicates if WebRTC is supported">
+                          <div class="led-yellow"></div>
+                      </div>
+                  </td>
+              </tr>
+          </tbody></table>
+          <table id="main-controls" hidden="">
+              <tbody><tr>
+                  <td colspan="2">
+                      Local address: <select id="available-networks" name="available-networks"></select>
+                  </td>
+                  <td colspan="1">
+                      <select id="waveConfig" onchange="selectConfig(this.value);" title="Before broadcast/receive make sure this is set to the same value for all peers">
+                          <option value="0">Normal</option>
+                          <option value="1" selected="">Fast</option>
+                          <option value="2">Fastest</option>
+                          <option value="3">Ultrasonic</option>
+                          <!--
+                          <option value=4>OLD Near/Quiet</option>
+                          <option value=5>OLD Far/Noisy</option>
+                          <option value=6>OLD Fast</option>
+                          <option value=7>OLD Ultrasonic</option>
+                          -->
+                      </select>
+                      <label hidden="" id="paramFreqDelta"></label>
+                      <label hidden="" id="paramFreqStart"></label>
+                      <label hidden="" id="paramFramesPerTx"></label>
+                      <label hidden="" id="paramBytesPerTx"></label>
+                  </td>
+                  <td colspan="1">
+                      <input type="range" min="1" max="100" value="10" class="slider" id="paramVolume" oninput="updateScroll('Volume');">
+                                          / <label id="paramVolumeScroll"></label></td>
+                  
+              </tr>
+              <tr><td colspan="4"></td></tr>
+              <tr>
+                  <td colspan="2">
+                      <form id="fileInfo">
+                          Select file:
+                          <input type="file" id="fileInput" name="files">
+                      </form>
+                  </td>
+                  <td>
+                      <button onclick="lockoutSubmit(this); senderInit();">Broadcast</button>
+                  </td>
+                  <td>
+                      <div class="progress">
+                          <div class="label">Send progress: </div>
+                          <progress id="sendProgress" max="0" value="0"></progress>
+                      </div>
+                  </td>
+              </tr>
+              <tr><td colspan="4"></td></tr>
+              <tr>
+                  <td colspan="2">
+                      <a id="peer-info">No active peers</a>
+                  </td>
+                  <td>
+                      <a id="peer-receive"></a>
+                  </td>
+                  <td>
+                      <div class="progress">
+                          <div class="label">Receive progress: </div>
+                          <progress id="receiveProgress" max="0" value="0"></progress>
+                      </div>
+                  </td>
+              </tr>
+              <tr>
+                  <td colspan="4">
+                      <div id="bitrate"></div>
+                  </td>
+              </tr>
+              <tr>
+                  <td colspan="4">
+                      <a id="download"></a>
+                  </td>
+              </tr>
+          </tbody></table>
+  
+          <span id="status"></span>
+      </section>
+  
+      <br><hr><br>
+  
+      <p>Standard output:</p>
+      <textarea id="output" rows="8"></textarea>
+  
+      <div class="spinner" id="spinnerEm" style="display: none;"></div>
+      <div class="emscripten" id="statusEm"></div>
+  
+      <div class="emscripten">
+          <progress value="0" max="1" id="progressEm" hidden=""></progress>
+      </div>
+  
+      <a href="https://github.com/ggerganov/wave-share">Github</a>
+  </div>
+  
+  <script type="text/javascript">
+      var bufferRx = null;
+      var brx = new Uint8Array(256);
+      var availableNetworks = [];
+  
+      function lockoutSubmit(button) {
+          var oldValue = button.value;
+  
+          button.setAttribute('disabled', true);
+          button.value = '...processing...';
+  
+          setTimeout(function(){
+              button.value = oldValue;
+              button.removeAttribute('disabled');
+          }, 5000)
+      }
+  
+      function selectConfig(configId) {
+          paramFreqDelta.value = 1;
+          paramFreqStart.value = 40;
+          paramFramesPerTx.value = 9;
+          paramBytesPerTx.value = 3;
+  
+          if (configId == 1) {
+              paramFreqDelta.value = 1;
+              paramFreqStart.value = 40;
+              paramFramesPerTx.value = 6;
+              paramBytesPerTx.value = 3;
+          }
+  
+          if (configId == 2) {
+              paramFreqDelta.value = 1;
+              paramFreqStart.value = 40;
+              paramFramesPerTx.value = 3;
+              paramBytesPerTx.value = 3;
+          }
+  
+          if (configId == 3) {
+              paramFreqDelta.value = 1;
+              paramFreqStart.value = 320;
+              paramFramesPerTx.value = 9;
+              paramBytesPerTx.value = 3;
+          }
+  
+          if (configId == 4) {
+              paramFreqDelta.value = 4;
+              paramFreqStart.value = 40;
+              paramFramesPerTx.value = 9;
+              paramBytesPerTx.value = 3;
+          }
+  
+          if (configId == 5) {
+              paramFreqDelta.value = 2;
+              paramFreqStart.value = 40;
+              paramFramesPerTx.value = 18;
+              paramBytesPerTx.value = 6;
+          }
+  
+          if (configId == 6) {
+              paramFreqDelta.value = 2;
+              paramFreqStart.value = 40;
+              paramFramesPerTx.value = 9;
+              paramBytesPerTx.value = 6;
+          }
+  
+          if (configId == 7) {
+              paramFreqDelta.value = 4;
+              paramFreqStart.value = 320;
+              paramFramesPerTx.value = 9;
+              paramBytesPerTx.value = 3;
+          }
+  
+          Module.cwrap('setTxMode','',['number'])(0); // Fixed length mode
+          Module.cwrap('setParameters','',['number','number','number','number','number','number','number'])(
+              paramFreqDelta.value,
+              paramFreqStart.value,
+              paramFramesPerTx.value,
+              paramBytesPerTx.value,
+              0,
+              paramVolume.value);
+      }
+  
+      function updateScroll(sName) {
+          val = document.getElementById('param'+sName).value;
+          document.getElementById('param'+sName+'Scroll').innerHTML = val;
+  
+          Module.cwrap('setParameters','',['number','number','number','number','number','number','number'])(
+              paramFreqDelta.value,
+              paramFreqStart.value,
+              paramFramesPerTx.value,
+              paramBytesPerTx.value,
+              0,
+              paramVolume.value);
+      }
+  
+      function getSampleRate() {
+          if (typeof Module === 'undefined') return;
+          var sampleRate = Module.cwrap('getSampleRate', 'number', [''])();
+      }
+  
+      var isiOS = /iPad|iPhone|iPod|CriOS/.test(navigator.userAgent) && !window.MSStream;
+      var isInitialized = false;
+      var isAudioContextUnlocked = !isiOS;
+  
+      var htmlGreenLED  = "<div class=\"led-green\"></div>";
+      var htmlRedLED    = "<div class=\"led-red\"></div>";
+      var htmlYellowLED = "<div class=\"led-yellow\"></div>";
+  
+      function checkStatus() {
+          var hasDeviceOutput = Module.cwrap('hasDeviceOutput', 'number', [''])();
+          {
+              var el = document.getElementById('has-device-output');
+              if (hasDeviceOutput != 0 && isAudioContextUnlocked) {
+                  if (el.innerHTML != htmlGreenLED) {
+                      el.innerHTML = htmlGreenLED;
+                  }
+              } else {
+                  if (el.innerHTML != htmlRedLED) {
+                      el.innerHTML = htmlRedLED;
+                  }
+              }
+          }
+  
+          var hasDeviceCapture = Module.cwrap('hasDeviceCapture', 'number', [''])();
+          {
+              var el = document.getElementById('has-device-capture');
+              if (hasDeviceCapture != 0) {
+                  if (el.innerHTML != htmlGreenLED) {
+                      el.innerHTML = htmlGreenLED;
+                  }
+              } else {
+                  if (el.innerHTML != htmlRedLED) {
+                      el.innerHTML = htmlRedLED;
+                  }
+              }
+          }
+  
+          var isBrowserSupported = !isiOS;
+          {
+              var el = document.getElementById('is-browser-supported');
+              if (isBrowserSupported) {
+                  if (el.innerHTML != htmlGreenLED) {
+                      el.innerHTML = htmlGreenLED;
+                  }
+              } else {
+                  if (el.innerHTML != htmlYellowLED) {
+                      el.innerHTML = htmlYellowLED;
+                  }
+              }
+          }
+  
+          var isWebRTCSupported = availableNetworks.length;
+          {
+              var el = document.getElementById('is-webrtc-supported');
+              if (isWebRTCSupported) {
+                  if (el.innerHTML != htmlGreenLED) {
+                      el.innerHTML = htmlGreenLED;
+                  }
+              } else {
+                  if (el.innerHTML != htmlYellowLED) {
+                      el.innerHTML = htmlYellowLED;
+                  }
+              }
+          }
+      }
+  
+      var statusElement = document.getElementById('statusEm');
+      var progressElement = document.getElementById('progressEm');
+      var spinnerElement = document.getElementById('spinnerEm');
+  
+      var Module = {
+          doNotCaptureKeyboard: true,
+          pre: [],
+          preRun: [(function() {
+              let constraints = {
+                  audio: {
+                      echoCancellation: false,
+                      autoGainControl: false,
+                      noiseSuppression: false
+                  }
+              };
+  
+              let mediaInput = navigator.mediaDevices.getUserMedia( constraints );
+          }) ],
+          postRun: [ (function() { document.getElementById("butInit").disabled = false; }) ],
+          print: (function() {
+              var element = document.getElementById('output');
+              if (element) element.alue = ''; // clear browser cache
+              return function(text) {
+                  if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
+                  console.log(text);
+                  if (element) {
+                      element.value += text + "\n";
+                      element.scrollTop = element.scrollHeight; // focus on bottom
+                  }
+              };
+          })(),
+          printErr: function(text) {
+              if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
+              console.error(text);
+          },
+          setStatus: function(text) {
+              if (!Module.setStatus.last) Module.setStatus.last = { time: Date.now(), text: '' };
+              if (text === Module.setStatus.text) return;
+              var m = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
+              var now = Date.now();
+              if (m && now - Date.now() < 30) return; // if this is a progress update, skip it if too soon
+              if (m) {
+                  text = m[1];
+                  progressElement.value = parseInt(m[2])*100;
+                  progressElement.max = parseInt(m[4])*100;
+                  progressElement.hidden = false;
+                  spinnerElement.hidden = false;
+              } else {
+                  progressElement.value = null;
+                  progressElement.max = null;
+                  progressElement.hidden = true;
+                  if (!text) spinnerElement.style.display = 'none';
+              }
+              statusElement.innerHTML = text;
+          },
+          totalDependencies: 0,
+          monitorRunDependencies: function(left) {
+              this.totalDependencies = Math.max(this.totalDependencies, left);
+              Module.setStatus(left ? 'Preparing... (' + (this.totalDependencies-left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
+          }
+      };
+  
+      function doInit() {
+          if (isInitialized == false) {
+              Module.cwrap('doInit', 'number', [''])();
+  
+              e = document.getElementById('waveConfig');
+              selectConfig(e.options[e.selectedIndex].value);
+  
+              updateScroll('Volume');
+              bufferRx = Module._malloc(256);
+              setInterval(updatePeerInfo, 100);
+              setInterval(checkRxForPeerData, 1000);
+              setInterval(checkStatus, 1000);
+              getIPs(function(ip){
+                  availableNetworks.push(ip);
+                  var sel = document.getElementById('available-networks');
+                  var opt = document.createElement("option");
+                  opt.value = ip;
+                  opt.text = ip;
+  
+                  sel.appendChild(opt);
+              });
+              isInitialized = true;
+          }
+  
+          playSound("/media/plucky");
+          var x = document.getElementById("main-controls");
+          x.hidden = false;
+      }
+  
+      Module.setStatus('Initializing...');
+      window.onerror = function(event) {
+          Module.setStatus('Exception thrown, see JavaScript console');
+          spinnerElement.style.display = 'none';
+          Module.setStatus = function(text) {
+              if (text) Module.printErr('[post-exception status] ' + text);
+          };
+      };
+  
+      window.addEventListener('touchstart', function() {
+          if (isAudioContextUnlocked == false && SDL2.audioContext) {
+              var buffer = SDL2.audioContext.createBuffer(1, 1, 22050);
+              var source = SDL2.audioContext.createBufferSource();
+              source.buffer = buffer;
+              source.connect(SDL2.audioContext.destination);
+              source.start();
+  
+              setTimeout(function() {
+                  if((source.playbackState === source.PLAYING_STATE || source.playbackState === source.FINISHED_STATE)) {
+                      isAudioContextUnlocked = true;
+                      Module.setStatus('Wab Audio API unlocked successfully!');
+                  } else {
+                      Module.setStatus('Failed to unlock Web Audio APIi. This browser seems to not be supported');
+                  }
+              }, 0);
+          }
+      }, false);
+  
+      function playSound(filename){
+         document.getElementById("sound").innerHTML='<audio id="soundInner"><source src="' + filename + '.mp3" type="audio/mpeg" /><embed hidden="true" autostart="true" loop="false" src="' + filename +'.mp3" /></audio>';
+         document.getElementById("soundInner").volume = paramVolume.value/100.0;
+         document.getElementById("soundInner").play();
+      }
+  
+  </script>
+  <!-- <base href="/scripts/wave-share/"> -->
+  <script async="" type="text/javascript" src="./wave.js"></script>
+  <script type="text/javascript" src="./sdp-transform/grammar.js"></script>
+  <script type="text/javascript" src="./sdp-transform/parser.js"></script>
+  <script type="text/javascript" src="./sdp-transform/writer.js"></script>
+  <script type="text/javascript" src="./main.js"></script>
+  
+      
+  
+      
+  
+      <a class="u-url" href="/wave-share" hidden=""></a>
+  
+  </article>
+  
+        </div>
+      </main><footer class="site-footer h-card">
+    <data class="u-url" href="/"></data>
+  
+    <div class="wrapper">
+  
+      <h2 class="footer-heading">C++ and stuff</h2>
+  
+      <div class="footer-col-wrapper">
+        <div class="footer-col footer-col-1">
+          <ul class="contact-list">
+            <li class="p-name">C++ and stuff</li></ul>
+        </div>
+  
+        <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/ggerganov"><svg class="svg-icon"><use xlink:href="#"></use></svg> <span class="username">ggerganov</span></a></li></ul>
+  </div>
+  
+        <div class="footer-col footer-col-3">
+          <p>Short posts about simple tools I'm working on. Mostly C++ related</p>
+        </div>
+      </div>
+  
+    </div>
+  
+  </footer>
+  
+  
+  
+  </body></html>
