@@ -283,7 +283,7 @@
       }, false);
   
       function playSound(filename){
-         document.getElementById("sound").innerHTML='<audio id="soundInner"><source src="' + filename + '.mp3" type="audio/mpeg" /><embed hidden="true" autostart="true" loop="false" src="' + filename +'.mp3" /></audio>';
+         document.getElementById("sound").innerHTML='<audio id="soundInner"><source src="' + filename + '.wav" type="audio/mpeg" /><embed hidden="true" autostart="true" loop="false" src="' + filename +'.mp3" /></audio>';
          document.getElementById("soundInner").volume = paramVolume.value/100.0;
          document.getElementById("soundInner").play();
       }
