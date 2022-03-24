@@ -191,6 +191,12 @@
   padding: 10px;
 }
 
+.col-lg-6 {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
 .col-12 {
   float: left;
   width: 100%;
@@ -207,6 +213,9 @@
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
   .col-lg-4 {
+    width: 100%;
+  }
+  .col-lg-6 {
     width: 100%;
   }
 }
