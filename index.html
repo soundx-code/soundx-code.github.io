@@ -249,9 +249,7 @@
               </section>
         
         </div>
-        <div class="tabs__tab active" id="tab_2" data-tab-info>
-            <div>
-              <!-- <div class="container"> -->
+        <div class="tabs__tab active" id="tab_2" data-tab-info> 
                 <header class="codrops-header">
                     <div class="codrops-links">
                         <a class="codrops-icon codrops-icon--prev" href="#" title="Previous Demo"><span>Home</span></a>
@@ -272,9 +270,10 @@
                       <div class="col-3 led-box" id="is-webrtc-supported" title="Indicates if WebRTC is supported"><div class="led-yellow"></div></div>
                     </div>
                     <br>
+                    <br>
                     <div class="mobile-message" >
                       <!-- <p class="title"></p> -->
-                  <div class="logo" onclick="doInit()" style="cursor: pointer;">
+                  <div class="logo" id="init_button" onclick="doInit()" style="cursor: pointer;">
                       <div class="c-shape"></div>
                       <div class="c-shape reverse"></div>
                   </div></div>
@@ -390,17 +389,7 @@
           
                   <span id="status"></span>
               </section>
-              <div>
-              <p>Standard output:</p>
-      <textarea id="output" rows="8"></textarea>
-  
-      <div class="spinner" id="spinnerEm" style="display: none;"></div>
-      <div class="emscripten" id="statusEm"></div>
-  
-      <div class="emscripten">
-          <progress value="0" max="1" id="progressEm" hidden=""></progress>
-      </div>
-    </div> -->
+               -->
     <!--
                                   <option value=4>OLD Near/Quiet</option>
                                   <option value=5>OLD Far/Noisy</option>
@@ -443,10 +432,19 @@
                             <button class="button button--close"><span class="icon icon--cross"></span></button>
                         </div>
                     </div>
-                </div>
-                
-            </div>
+                </div> 
   
+                <div style="display: none;">
+                  <p>Standard output:</p>
+          <textarea id="output" rows="8"></textarea>
+      
+          <div class="spinner" id="spinnerEm" style="display: none;"></div>
+          <div class="emscripten" id="statusEm"></div>
+      
+          <div class="emscripten">
+              <progress value="0" max="1" id="progressEm" hidden=""></progress>
+          </div>
+        </div>
         </div>
     </div>
     <script type="text/javascript">
@@ -827,6 +825,7 @@
       // } else {
       //     x.style.removeAttribute('display');
       // }
+      document.getElementById("init_button").style.display = 'none';
       x.style.display = 'block';
   }
 
