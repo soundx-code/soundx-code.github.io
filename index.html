@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShareX | Serverless, peer-to-peer, local file sharing through sound</title>
     <link href="https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./style.css.map">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -94,6 +95,7 @@
       --><div class="taeb" taeb-direction="right" data-tab-value="#tab_1">Manager</div>
         </div>
       </div>
+      <div id="sound"></div>
       
     <div class="tab-content">
         <div class="tabs__tab" id="tab_1" data-tab-info>
@@ -248,16 +250,36 @@
         
         </div>
         <div class="tabs__tab active" id="tab_2" data-tab-info>
-            <div class="container">
+            <div>
+              <!-- <div class="container"> -->
                 <header class="codrops-header">
                     <div class="codrops-links">
                         <a class="codrops-icon codrops-icon--prev" href="#" title="Previous Demo"><span>Home</span></a>
                         <a class="codrops-icon codrops-icon--drop" href="#" title="Back to the article"><span>Share</span></a>
                     </div>
                     <h1>ShareX <span>Serverless, peer-to-peer, local file sharing through sound waves</span></h1>
+                    <div class="row">
+                      <div class="col-3 led-box"><p>Output:</p></div>
+                      <div class="col-3 led-box"><p>Capture:</p></div>
+                      <div class="col-3 led-box"><p>Browser:</p></div>
+                      <div class="col-3 led-box"><p>WebRTC:</p></div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-3 led-box" id="has-device-output" title="Indicates if an audio output device is available"><div class="led-yellow"></div></div>
+                      <div class="col-3 led-box" id="has-device-capture" title="Indicates if an audio capture device is available. Make sure this page has access to the microphone"><div class="led-yellow"></div></div>
+                      <div class="col-3 led-box" id="is-browser-supported" title="Indicates if the browser is supported"><div class="led-yellow"></div></div>
+                      <div class="col-3 led-box" id="is-webrtc-supported" title="Indicates if WebRTC is supported"><div class="led-yellow"></div></div>
+                    </div>
+                    <br>
+                    <div class="mobile-message" >
+                      <!-- <p class="title"></p> -->
+                  <div class="logo" onclick="doInit()" style="cursor: pointer;">
+                      <div class="c-shape"></div>
+                      <div class="c-shape reverse"></div>
+                  </div></div>
                 </header>
                 <!-- <section>
-                  <div id="sound"></div>
           
                   <table>
                       <tbody><tr>
@@ -385,14 +407,9 @@
                                   <option value=6>OLD Fast</option>
                                   <option value=7>OLD Ultrasonic</option>
                                   -->
-                <div class="content">
+                <div class="content" id="main-controls" style="display: none;">
                     
-                    <div class="mobile-message">
-                        <p class="title"></p>
-                    <div class="logo">
-                        <div class="c-shape"></div>
-                        <div class="c-shape reverse"></div>
-                    </div></div>
+                    
                     <div class="component" data-path-start="M280,466c0,0.13-0.001,0.26-0.003,0.39c-0.002,0.134-0.004,0.266-0.007,0.396
         C279.572,482.992,266.307,496,250,496h-2.125H51.625H50c-16.316,0-29.592-13.029-29.99-29.249c-0.003-0.13-0.006-0.261-0.007-0.393
         C20.001,466.239,20,466.119,20,466l0,0c0-0.141,0.001-0.281,0.003-0.422C20.228,449.206,33.573,436,50,436h1.625h196.25H250
@@ -549,7 +566,7 @@
     </div>
   </div>
 </div>
-<!-- 
+
 <script type="text/javascript">
   var bufferRx = null;
   var brx = new Uint8Array(256);
@@ -779,6 +796,7 @@
   };
 
   function doInit() {
+    console.log('clicked');
       if (isInitialized == false) {
           Module.cwrap('doInit', 'number', [''])();
 
@@ -804,7 +822,12 @@
 
       playSound("/media/plucky");
       var x = document.getElementById("main-controls");
-      x.hidden = false;
+      // if (x.style.removeProperty) {
+      // x.style.removeProperty('display');
+      // } else {
+      //     x.style.removeAttribute('display');
+      // }
+      x.style.display = 'block';
   }
 
   Module.setStatus('Initializing...');
@@ -841,12 +864,12 @@
      document.getElementById("soundInner").play();
   }
 
-</script> -->
-<!-- <script async="" type="text/javascript" src="./wave.js"></script>
+</script>
+<script async="" type="text/javascript" src="./wave.js"></script>
 <script type="text/javascript" src="./sdp-transform/grammar.js"></script>
 <script type="text/javascript" src="./sdp-transform/parser.js"></script>
 <script type="text/javascript" src="./sdp-transform/writer.js"></script>
-<script type="text/javascript" src="./main.js"></script> -->
+<script type="text/javascript" src="./main.js"></script>
 <script src="js/classie.js"></script>
 <script src="js/snap.svg-min.js"></script>
 <script src="js/main.js"></script>

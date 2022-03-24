@@ -76,7 +76,7 @@
     width: 100%;
     text-align: center;
     font-weight: bold;
-    display: none;
+    display: block;
   }
   
   /* Header */
@@ -162,8 +162,45 @@
     padding: 1em 0;
   }
   
-  @media screen and (max-height: 650px){
+  /* @media screen and (max-height: 650px){
     .mobile-message {
       display: block;
     }
+  } */
+
+  .row{margin-right:-15px;margin-left:-15px}
+  .row-no-gutters{margin-right:0;margin-left:0}.row-no-gutters [class*=col-]{padding-right:0;padding-left:0}
+  .row:after,.row:before{display:table;content:" "}
+
+  /* Create three equal columns that floats next to each other */
+.col-3 {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+.col-4 {
+  float: left;
+  width: 33.33%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+/* @media screen and (max-width: 600px) {
+  .col-3 {
+    width: 100%;
   }
+}
+
+@media screen and (max-width: 600px) {
+  .col-3 {
+    width: 100%;
+  }
+} */
