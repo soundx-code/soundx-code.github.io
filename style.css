@@ -1064,8 +1064,9 @@ body {
   height: 35vmin;
   border-radius: 50%;
   background: #5bc1ff;
+  -webkit-animation: circle 1.5s linear infinite;
   /* -webkit-animation: circle 1.5s linear infinite,ripple 0.9s linear infinite; */
-          /* animation: circle 1.5s linear infinite,ripple 0.9s linear infinite; */
+          animation: circle 1.5s linear infinite;
 }
 
 .logo .c-shape {
