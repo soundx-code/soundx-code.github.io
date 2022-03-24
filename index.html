@@ -390,20 +390,20 @@
                                   -->
                 <div class="content" >
                     
-                  <div class="mobile-message" >
+                  <div class=" mobile-message" >
                     <!-- <p class="title"></p> -->
                 <div class="logo" id="init_button" onclick="doInit()" style="cursor: pointer;">
                     <div class="c-shape"></div>
                     <div class="c-shape reverse"></div>
                 </div></div>
 
-                <div id="main-controls" style="display: none;">
-                  <table>
-                    <tbody><tr>
-                        <td colspan="2">
+                <div id="main-controls" style="display: none; padding: 1em;">
+                  <div class="row">
+                    
+                        <div class="col-lg-4">
                             Local address: <select id="available-networks" name="available-networks"></select>
-                        </td>
-                        <td colspan="1">
+                          </div>
+                        <div class="col-lg-4">
                             <select id="waveConfig" onchange="selectConfig(this.value);" title="Before broadcast/receive make sure this is set to the same value for all peers">
                                 <option value="0">Normal</option>
                                 <option value="1" selected="">Fast</option>
@@ -415,56 +415,54 @@
                             <label hidden="" id="paramFreqStart"></label>
                             <label hidden="" id="paramFramesPerTx"></label>
                             <label hidden="" id="paramBytesPerTx"></label>
-                        </td>
-                        <td colspan="1">
+                        </div>
+                        <div class="col-lg-4">
                             <input type="range" min="1" max="100" value="10" class="slider" id="paramVolume" oninput="updateScroll('Volume');">
-                                                / <label id="paramVolumeScroll"></label></td>
+                                                / <label id="paramVolumeScroll">Volume</label></td>
                         
-                    </tr>
-                    <tr><td colspan="4"></td></tr>
-                    <tr>
-                        <td colspan="2">
+                        </div>
+              </div>
+                     
+                    <div class="row">
+                      <div class="col-lg-4">
                             <form id="fileInfo">
                                 Select file:
                                 <input type="file" id="fileInput" name="files">
                             </form>
-                        </td>
-                        <td>
+                          </div>
+                          <div class="col-lg-4">
                             <button onclick="lockoutSubmit(this); senderInit();">Broadcast</button>
-                        </td>
-                        <td>
-                            <div class="progress">
-                                <div class="label">Send progress: </div>
-                                <progress id="sendProgress" max="0" value="0"></progress>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr><td colspan="4"></td></tr>
-                    <tr>
-                        <td colspan="2">
+                          </div> 
+                          
+                      </div>
+                      <div class="row">
+                      <div class="col-lg-4">
                             <a id="peer-info">No active peers</a>
-                        </td>
-                        <td>
+                        </div>
+                        <div class="col-lg-4">
                             <a id="peer-receive"></a>
-                        </td>
-                        <td>
-                            <div class="progress">
-                                <div class="label">Receive progress: </div>
-                                <progress id="receiveProgress" max="0" value="0"></progress>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4">
+                        </div> 
+                        <div class="col-lg-4">
+
+                        <div class="progress">
+                            <div class="label">Receive progress: </div>
+                            <progress id="receiveProgress" max="0" value="0"></progress>
+                        </div>
+                      </div>
+                      <div class="col-lg-4">
+
+                        <div class="progress">
+                          <div class="label">Send progress: </div>
+                          <progress id="sendProgress" max="0" value="0"></progress>
+                      </div>
+                    </div>
+                      </div>
+                      <div class="row">
                             <div id="bitrate"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4">
+                      </div>
+                      <div class="row">
                             <a id="download"></a>
-                        </td>
-                    </tr>
-                </tbody></table>
+                      </div> 
         
                 <span id="status"></span>
                 </div>
@@ -818,7 +816,7 @@
 
           let mediaInput = navigator.mediaDevices.getUserMedia( constraints );
       }) ],
-      postRun: [ (function() { document.getElementById("butInit").disabled = false; }) ],
+      // postRun: [ (function() { document.getElementById("butInit").disabled = false; }) ],
       print: (function() {
           var element = document.getElementById('output');
           if (element) element.value = ''; // clear browser cache
@@ -864,38 +862,40 @@
 
   function doInit() {
     console.log('clicked');
-      // if (isInitialized == false) {
-      //     Module.cwrap('doInit', 'number', [''])();
+      if (isInitialized == false) {
+          Module.cwrap('doInit', 'number', [''])();
 
-      //     e = document.getElementById('waveConfig');
-      //     selectConfig(e.options[e.selectedIndex].value);
+          e = document.getElementById('waveConfig');
+          selectConfig(e.options[e.selectedIndex].value);
 
-      //     updateScroll('Volume');
-      //     bufferRx = Module._malloc(256);
-      //     setInterval(updatePeerInfo, 100);
-      //     setInterval(checkRxForPeerData, 1000);
-      //     setInterval(checkStatus, 1000);
-      //     getIPs(function(ip){
-      //         availableNetworks.push(ip);
-      //         var sel = document.getElementById('available-networks');
-      //         var opt = document.createElement("option");
-      //         opt.value = ip;
-      //         opt.text = ip;
+          updateScroll('Volume');
+          bufferRx = Module._malloc(256);
+          setInterval(updatePeerInfo, 100);
+          setInterval(checkRxForPeerData, 1000);
+          setInterval(checkStatus, 1000);
+          getIPs(function(ip){
+              availableNetworks.push(ip);
+              var sel = document.getElementById('available-networks');
+              var opt = document.createElement("option");
+              opt.value = ip;
+              opt.text = ip;
 
-      //         sel.appendChild(opt);
-      //     });
-      //     isInitialized = true;
-      // }
+              sel.appendChild(opt);
+          });
+          isInitialized = true;
+      }
 
-      playSound("/media/plucky");
+      // playSound("./media/plucky");
       var x = document.getElementById("main-controls");
       // if (x.style.removeProperty) {
       // x.style.removeProperty('display');
       // } else {
       //     x.style.removeAttribute('display');
       // }
-      document.getElementById("init_button").style.display = 'none';
-      x.style.display = 'block';
+      $('#init_button').fadeOut();
+      $('#main-controls').fadeIn();
+      // document.getElementById("init_button").style.display = 'none';
+      // x.style.display = 'block';
   }
 
   Module.setStatus('Initializing...');
