@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="css/demo.css" />
     <link rel="stylesheet" type="text/css" href="css/component.css" />
     <link rel="stylesheet" type="text/css" href="css/addon.css" />
-    <!-- <link rel="stylesheet" href="./assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="C++ and stuff"> -->
+    <link rel="stylesheet" href="./assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="C++ and stuff">
     <script src="js/modernizr-custom.js"></script>
     <style>
         [data-tab-info] {
@@ -269,14 +269,6 @@
                       <div class="col-3 led-box" id="is-browser-supported" title="Indicates if the browser is supported"><div class="led-yellow"></div></div>
                       <div class="col-3 led-box" id="is-webrtc-supported" title="Indicates if WebRTC is supported"><div class="led-yellow"></div></div>
                     </div>
-                    <br>
-                    <br>
-                    <div class="mobile-message" >
-                      <!-- <p class="title"></p> -->
-                  <div class="logo" id="init_button" onclick="doInit()" style="cursor: pointer;">
-                      <div class="c-shape"></div>
-                      <div class="c-shape reverse"></div>
-                  </div></div>
                 </header>
                 <!-- <section>
           
@@ -396,10 +388,87 @@
                                   <option value=6>OLD Fast</option>
                                   <option value=7>OLD Ultrasonic</option>
                                   -->
-                <div class="content" id="main-controls" style="display: none;">
+                <div class="content" >
                     
-                    
-                    <div class="component" data-path-start="M280,466c0,0.13-0.001,0.26-0.003,0.39c-0.002,0.134-0.004,0.266-0.007,0.396
+                  <div class="mobile-message" >
+                    <!-- <p class="title"></p> -->
+                <div class="logo" id="init_button" onclick="doInit()" style="cursor: pointer;">
+                    <div class="c-shape"></div>
+                    <div class="c-shape reverse"></div>
+                </div></div>
+
+                <div id="main-controls" style="display: none;">
+                  <table>
+                    <tbody><tr>
+                        <td colspan="2">
+                            Local address: <select id="available-networks" name="available-networks"></select>
+                        </td>
+                        <td colspan="1">
+                            <select id="waveConfig" onchange="selectConfig(this.value);" title="Before broadcast/receive make sure this is set to the same value for all peers">
+                                <option value="0">Normal</option>
+                                <option value="1" selected="">Fast</option>
+                                <option value="2">Fastest</option>
+                                <option value="3">Ultrasonic</option>
+                                
+                            </select>
+                            <label hidden="" id="paramFreqDelta"></label>
+                            <label hidden="" id="paramFreqStart"></label>
+                            <label hidden="" id="paramFramesPerTx"></label>
+                            <label hidden="" id="paramBytesPerTx"></label>
+                        </td>
+                        <td colspan="1">
+                            <input type="range" min="1" max="100" value="10" class="slider" id="paramVolume" oninput="updateScroll('Volume');">
+                                                / <label id="paramVolumeScroll"></label></td>
+                        
+                    </tr>
+                    <tr><td colspan="4"></td></tr>
+                    <tr>
+                        <td colspan="2">
+                            <form id="fileInfo">
+                                Select file:
+                                <input type="file" id="fileInput" name="files">
+                            </form>
+                        </td>
+                        <td>
+                            <button onclick="lockoutSubmit(this); senderInit();">Broadcast</button>
+                        </td>
+                        <td>
+                            <div class="progress">
+                                <div class="label">Send progress: </div>
+                                <progress id="sendProgress" max="0" value="0"></progress>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr><td colspan="4"></td></tr>
+                    <tr>
+                        <td colspan="2">
+                            <a id="peer-info">No active peers</a>
+                        </td>
+                        <td>
+                            <a id="peer-receive"></a>
+                        </td>
+                        <td>
+                            <div class="progress">
+                                <div class="label">Receive progress: </div>
+                                <progress id="receiveProgress" max="0" value="0"></progress>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div id="bitrate"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <a id="download"></a>
+                        </td>
+                    </tr>
+                </tbody></table>
+        
+                <span id="status"></span>
+                </div>
+                    <div class="component" style="display: none;" data-path-start="M280,466c0,0.13-0.001,0.26-0.003,0.39c-0.002,0.134-0.004,0.266-0.007,0.396
         C279.572,482.992,266.307,496,250,496h-2.125H51.625H50c-16.316,0-29.592-13.029-29.99-29.249c-0.003-0.13-0.006-0.261-0.007-0.393
         C20.001,466.239,20,466.119,20,466l0,0c0-0.141,0.001-0.281,0.003-0.422C20.228,449.206,33.573,436,50,436h1.625h196.25H250
         c16.438,0,29.787,13.222,29.997,29.608C279.999,465.738,280,465.869,280,466L280,466z" data-path-listen="M181,466c0,0.13-0.001,0.26-0.003,0.39c-0.002,0.134-0.004,0.266-0.007,0.396
@@ -795,28 +864,28 @@
 
   function doInit() {
     console.log('clicked');
-      if (isInitialized == false) {
-          Module.cwrap('doInit', 'number', [''])();
+      // if (isInitialized == false) {
+      //     Module.cwrap('doInit', 'number', [''])();
 
-          e = document.getElementById('waveConfig');
-          selectConfig(e.options[e.selectedIndex].value);
+      //     e = document.getElementById('waveConfig');
+      //     selectConfig(e.options[e.selectedIndex].value);
 
-          updateScroll('Volume');
-          bufferRx = Module._malloc(256);
-          setInterval(updatePeerInfo, 100);
-          setInterval(checkRxForPeerData, 1000);
-          setInterval(checkStatus, 1000);
-          getIPs(function(ip){
-              availableNetworks.push(ip);
-              var sel = document.getElementById('available-networks');
-              var opt = document.createElement("option");
-              opt.value = ip;
-              opt.text = ip;
+      //     updateScroll('Volume');
+      //     bufferRx = Module._malloc(256);
+      //     setInterval(updatePeerInfo, 100);
+      //     setInterval(checkRxForPeerData, 1000);
+      //     setInterval(checkStatus, 1000);
+      //     getIPs(function(ip){
+      //         availableNetworks.push(ip);
+      //         var sel = document.getElementById('available-networks');
+      //         var opt = document.createElement("option");
+      //         opt.value = ip;
+      //         opt.text = ip;
 
-              sel.appendChild(opt);
-          });
-          isInitialized = true;
-      }
+      //         sel.appendChild(opt);
+      //     });
+      //     isInitialized = true;
+      // }
 
       playSound("/media/plucky");
       var x = document.getElementById("main-controls");
@@ -873,6 +942,23 @@
 <script src="js/snap.svg-min.js"></script>
 <script src="js/main.js"></script>
 <script src="./js/index.js"></script>
+
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+  (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+  m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+  (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+  ym(88021965, "init", {
+       clickmap:true,
+       trackLinks:true,
+       accurateTrackBounce:true,
+       webvisor:true
+  });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/88021965" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 
 </body>
 </html>
