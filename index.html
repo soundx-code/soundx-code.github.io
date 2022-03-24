@@ -1,964 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShareX | Serverless, peer-to-peer, local file sharing through sound</title>
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./style.css.map">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
-    <link rel="stylesheet" type="text/css" href="css/icons.css" />
-    <link rel="stylesheet" type="text/css" href="css/demo.css" />
-    <link rel="stylesheet" type="text/css" href="css/component.css" />
-    <link rel="stylesheet" type="text/css" href="css/addon.css" />
-    <link rel="stylesheet" href="./assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="C++ and stuff">
-    <script src="js/modernizr-custom.js"></script>
-    <style>
-        [data-tab-info] {
-            display: none;
-        }
-          
-        .active[data-tab-info] {
-            display: block;
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+<link href="images/favicon.ico" rel="icon" />
+<title>ShareX | Serverless, Peer-to-Peer, File sharing through Sound Waves</title>
+<meta name="description" content="MXapp is Multi-purpose Bootstrap 5 App Landing Page HTML Template.">
+<meta name="author" content="harnishdesign.net">
+
+<!-- Web Fonts -->
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900' type='text/css'>
+
+<!-- Stylesheet
+============================================= -->
+<!-- Bootstrap -->
+<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css" />
+<!-- Font Awesome Icon -->
+<link rel="stylesheet" type="text/css" href="vendor/font-awesome/css/all.min.css" />
+<!-- Owl Carousel -->
+<link rel="stylesheet" type="text/css" href="vendor/owl.carousel/assets/owl.carousel.min.css" />
+<!-- Magnific Popup -->
+<link rel="stylesheet" type="text/css" href="vendor/magnific-popup/magnific-popup.min.css" />
+<!-- Custom Stylesheet -->
+<link rel="stylesheet" type="text/css" href="css_b/stylesheet.css" />
+<!-- Colors Css -->
+<link id="color-switcher" type="text/css" rel="stylesheet" href="#" />
 </head>
-<body>
-<div class="app-container">
-  <div class="left-area">
-    <button class="btn-close-left">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-x-circle" viewBox="0 0 24 24">
-        <defs/>
-        <circle cx="12" cy="12" r="10"/>
-        <path d="M15 9l-6 6M9 9l6 6"/>
-      </svg>
-    </button>
-    <div class="app-name">ShareX</div>
-    <a href="#" class="item-link active" id="pageLink">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-grid" viewBox="0 0 24 24">
-        <defs />
-        <path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z" />
-      </svg>
-    </a>
-    <a href="#" class="item-link" id="pageLink">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-folder" viewBox="0 0 24 24">
-        <defs />
-        <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
-      </svg>
-    </a>
-    <a href="#" class="item-link" id="pageLink">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-hard-drive" viewBox="0 0 24 24">
-        <defs />
-        <path d="M22 12H2M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11zM6 16h.01M10 16h.01" />
-      </svg>
-    </a>
-    <a href="#" class="item-link" id="pageLink">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-settings" viewBox="0 0 24 24">
-        <defs />
-        <circle cx="12" cy="12" r="3" />
-        <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
-      </svg>
-    </a>
-    <button class="btn-logout">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-log-out" viewBox="0 0 24 24">
-        <defs/>
-        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/>
-      </svg>
-    </button>
-  </div>
-  <div class="main-area">
-    <button class="btn-show-right-area">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"/></svg>
-    </button>
-    <button class="btn-show-left-area">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </button>
-    <div class="main-area-header">
-      <div class="search-wrapper" id="searchLine">
-      <input class="search-input" type="text" placeholder="e.g. files.doc">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-search" viewBox="0 0 24 24">
-        <defs/>
-        <circle cx="11" cy="11" r="8"/>
-        <path d="M21 21l-4.35-4.35"/>
-      </svg>
-    </div>
-    </div>
-    
 
-    <div class="wrapper">
-        <div class="taeb-switch left text-center">
-          <div class="taeb active" taeb-direction="left" data-tab-value="#tab_2">Share Files</div><!--
-      --><div class="taeb" taeb-direction="right" data-tab-value="#tab_1">Manager</div>
-        </div>
-      </div>
-      <div id="sound"></div>
-      
-    <div class="tab-content">
-        <div class="tabs__tab" id="tab_1" data-tab-info>
-            <section class="content-section">
-                <h1 class="section-header">Quick Access</h1>
-                <div class="access-links">
-                  <div class="access-link-wrapper">
-                    <div class="access-icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-image">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                        <circle cx="8.5" cy="8.5" r="1.5"/>
-                        <polyline points="21 15 16 10 5 21"/>
-                      </svg>
-                    </div>
-                    <span class="access-text">Images</span>
-                  </div>
-                  <div class="access-link-wrapper">
-                    <div class="access-icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-music">
-                        <path d="M9 18V5l12-2v13"/>
-                        <circle cx="6" cy="18" r="3"/>                   <circle cx="18" cy="16" r="3"/>
-                      </svg>
-                    </div>
-                    <span class="access-text">Music</span>
-                  </div>
-                  <div class="access-link-wrapper">
-                    <div class="access-icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-play">
-                        <polygon points="5 3 19 12 5 21 5 3"/>
-                      </svg>
-                    </div>
-                    <span class="access-text">Video</span>
-                  </div>
-                  <div class="access-link-wrapper">
-                    <div class="access-icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-align-left">
-                        <line x1="17" y1="10" x2="3" y2="10"/>
-                        <line x1="21" y1="6" x2="3" y2="6"/>
-                        <line x1="21" y1="14" x2="3" y2="14"/>
-                        <line x1="17" y1="18" x2="3" y2="18"/>
-                      </svg>
-                    </div>
-                    <span class="access-text">Docs</span>
-                  </div>
-                  <div class="access-link-wrapper">
-                    <div class="access-icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers">
-                        <polygon points="12 2 2 7 12 12 22 7 12 2"/>
-                        <polyline points="2 17 12 22 22 17"/>
-                        <polyline points="2 12 12 17 22 12"/>
-                      </svg>
-                    </div>
-                    <span class="access-text">Apps</span>
-                  </div>
-                  <div class="access-link-wrapper">
-                    <div class="access-icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-down-circle">
-                        <circle cx="12" cy="12" r="10"/>
-                        <polyline points="8 12 12 16 16 12"/>
-                        <line x1="12" y1="8" x2="12" y2="16"/>
-                      </svg>
-                    </div>
-                    <span class="access-text">Download</span>
-                  </div>
-                </div>
-              </section>
-              <section class="content-section">
-                 <div class="section-header-wrapper">
-                   <h1 class="section-header">Preview</h1>
-                   <a class="section-header-link">
-                     View in folders
-                   </a>
-                 </div>
-                <div class="content-section-line">
-                  <div class="section-part left">
-                    <a class="image-wrapper">
-                      <div class="image-overlay">
-                        <div class="video-info">
-                          <div class="video-info-text">
-                            <p class="video-name medium">Happiness & Tears</p>
-                            <p class="video-subtext medium">45.5 MB</p>
-                          </div>
-                          <button class="btn-play"></button>
-                      </div>
-                      </div>
-                      <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2251&q=80"/>
-                      <span class="video-time">10:32</span>
-                    </a>
-                  </div>
-                  <div class="section-part right">
-                    <div class="content-part-line">
-                      <a class="image-wrapper">
-                        <div class="image-overlay">
-                        <div class="video-info">
-                        <div class="video-info-text">
-                          <p class="video-name tiny">High Hopes</p>
-                          <p class="video-subtext tiny">50 MB</p>
-                        </div>
-                      </div>
-                      </div>
-                      <img src="https://images.unsplash.com/photo-1515552726023-7125c8d07fb3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2167&q=80"/>
-                        <span class="video-time">02:35</span>
-                    </a>
-                      <a class="image-wrapper">
-                        <div class="image-overlay">
-                        <div class="video-info">
-                        <div class="video-info-text">
-                          <p class="video-name tiny">Imaginery you</p>
-                          <p class="video-subtext tiny">210.2 MB</p>
-                        </div>
-                      </div>
-                      </div>
-                        <img src="https://images.unsplash.com/photo-1542359649-31e03cd4d909?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2167&q=80"/>
-                        <span class="video-time">04:15</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </section>
-              <section class="content-section">
-                <div class="section-header-wrapper">
-                  <h1 class="section-header">Recent Files</h1>
-                  <a class="section-header-link">
-                    View all files
-                  </a>
-                </div>
-                <div class="files-table">
-                  <div class="files-table-header">
-                    <div class="column-header table-cell">Name</div>
-                    <div class="column-header table-cell size-cell">Size</div>
-                    <div class="column-header table-cell">Last Modified</div>
-                    <div class="column-header table-cell">Action</div>
-                  </div>
-                  <div class="files-table-row">
-                    <div class="table-cell name-cell pdf">Brandenburg.pdf</div>
-                    <div class="table-cell">42 MB</div>
-                    <div class="table-cell">Feb 26, 2022</div>
-                    <div class="table-cell action-cell">
-                      <button class="more-action"></button>
-                    </div>
-                  </div>
-                  <div class="files-table-row">
-                    <div class="table-cell name-cell jpg">TheLionsRoar.jpg</div>
-                    <div class="table-cell size-cell">500 KB</div>
-                    <div class="table-cell">Feb 11, 2022</div>
-                    <div class="table-cell action-cell">
-                      <button class="more-action"></button>
-                    </div>
-                  </div>
-                </div>
-              </section>
-        
-        </div>
-        <div class="tabs__tab active" id="tab_2" data-tab-info> 
-                <header class="codrops-header">
-                    <div class="codrops-links">
-                        <a class="codrops-icon codrops-icon--prev" href="#" title="Previous Demo"><span>Home</span></a>
-                        <a class="codrops-icon codrops-icon--drop" href="#" title="Back to the article"><span>Share</span></a>
-                    </div>
-                    <h1>ShareX <span>Serverless, peer-to-peer, local file sharing through sound waves</span></h1>
-                    <div class="row">
-                      <div class="col-3 led-box"><p>Output:</p></div>
-                      <div class="col-3 led-box"><p>Capture:</p></div>
-                      <div class="col-3 led-box"><p>Browser:</p></div>
-                      <div class="col-3 led-box"><p>WebRTC:</p></div>
-                    </div>
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
 
-                    <div class="row">
-                      <div class="col-3 led-box" id="has-device-output" title="Indicates if an audio output device is available"><div class="led-yellow"></div></div>
-                      <div class="col-3 led-box" id="has-device-capture" title="Indicates if an audio capture device is available. Make sure this page has access to the microphone"><div class="led-yellow"></div></div>
-                      <div class="col-3 led-box" id="is-browser-supported" title="Indicates if the browser is supported"><div class="led-yellow"></div></div>
-                      <div class="col-3 led-box" id="is-webrtc-supported" title="Indicates if WebRTC is supported"><div class="led-yellow"></div></div>
-                    </div>
-                </header>
-                <!-- <section>
-          
-                  <table>
-                      <tbody><tr>
-                          <td colspan="4" align="center">
-                              <button onclick="doInit()" id="butInit">Init</button>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td colspan="4" align="center">
-                              <div class="led-box">
-                                  <p>Output:</p>
-                              </div>
-                              <div class="led-box">
-                                  <p>Capture:</p>
-                              </div>
-                              <div class="led-box">
-                                  <p>Browser:</p>
-                              </div>
-                              <div class="led-box">
-                                  <p>WebRTC:</p>
-                              </div>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td colspan="4" align="center">
-                              <div class="led-box" id="has-device-output" title="Indicates if an audio output device is available">
-                                  <div class="led-yellow"></div>
-                              </div>
-                              <div class="led-box" id="has-device-capture" title="Indicates if an audio capture device is available. Make sure this page has access to the microphone">
-                                  <div class="led-yellow"></div>
-                              </div>
-                              <div class="led-box" id="is-browser-supported" title="Indicates if the browser is supported">
-                                  <div class="led-yellow"></div>
-                              </div>
-                              <div class="led-box" id="is-webrtc-supported" title="Indicates if WebRTC is supported">
-                                  <div class="led-yellow"></div>
-                              </div>
-                          </td>
-                      </tr>
-                  </tbody></table>
-                  <table id="main-controls" hidden="">
-                      <tbody><tr>
-                          <td colspan="2">
-                              Local address: <select id="available-networks" name="available-networks"></select>
-                          </td>
-                          <td colspan="1">
-                              <select id="waveConfig" onchange="selectConfig(this.value);" title="Before broadcast/receive make sure this is set to the same value for all peers">
-                                  <option value="0">Normal</option>
-                                  <option value="1" selected="">Fast</option>
-                                  <option value="2">Fastest</option>
-                                  <option value="3">Ultrasonic</option>
-                                  
-                              </select>
-                              <label hidden="" id="paramFreqDelta"></label>
-                              <label hidden="" id="paramFreqStart"></label>
-                              <label hidden="" id="paramFramesPerTx"></label>
-                              <label hidden="" id="paramBytesPerTx"></label>
-                          </td>
-                          <td colspan="1">
-                              <input type="range" min="1" max="100" value="10" class="slider" id="paramVolume" oninput="updateScroll('Volume');">
-                                                  / <label id="paramVolumeScroll"></label></td>
-                          
-                      </tr>
-                      <tr><td colspan="4"></td></tr>
-                      <tr>
-                          <td colspan="2">
-                              <form id="fileInfo">
-                                  Select file:
-                                  <input type="file" id="fileInput" name="files">
-                              </form>
-                          </td>
-                          <td>
-                              <button onclick="lockoutSubmit(this); senderInit();">Broadcast</button>
-                          </td>
-                          <td>
-                              <div class="progress">
-                                  <div class="label">Send progress: </div>
-                                  <progress id="sendProgress" max="0" value="0"></progress>
-                              </div>
-                          </td>
-                      </tr>
-                      <tr><td colspan="4"></td></tr>
-                      <tr>
-                          <td colspan="2">
-                              <a id="peer-info">No active peers</a>
-                          </td>
-                          <td>
-                              <a id="peer-receive"></a>
-                          </td>
-                          <td>
-                              <div class="progress">
-                                  <div class="label">Receive progress: </div>
-                                  <progress id="receiveProgress" max="0" value="0"></progress>
-                              </div>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td colspan="4">
-                              <div id="bitrate"></div>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td colspan="4">
-                              <a id="download"></a>
-                          </td>
-                      </tr>
-                  </tbody></table>
-          
-                  <span id="status"></span>
-              </section>
-               -->
-    <!--
-                                  <option value=4>OLD Near/Quiet</option>
-                                  <option value=5>OLD Far/Noisy</option>
-                                  <option value=6>OLD Fast</option>
-                                  <option value=7>OLD Ultrasonic</option>
-                                  -->
-                <div class="content" >
-                    
-                  <div class="mobile-message" id="mobile-message">
-                    <!-- <p class="title"></p> -->
-                <div class="logo" id="init_button" onclick="doInit()" style="cursor: pointer;">
-                    <div class="c-shape"></div>
-                    <div class="c-shape reverse"></div>
-                </div></div>
-
-                <div id="main-controls" style="display: none; padding: 1em;">
-                  <div class="row">
-                    
-                        <div class="col-lg-4">
-                            Local address: <select id="available-networks" name="available-networks"></select>
-                          </div>
-                        <div class="col-lg-4">
-                            <select id="waveConfig" onchange="selectConfig(this.value);" title="Before broadcast/receive make sure this is set to the same value for all peers">
-                                <option value="0">Normal</option>
-                                <option value="1" selected="">Fast</option>
-                                <option value="2">Fastest</option>
-                                <option value="3">Ultrasonic</option>
-                                
-                            </select>
-                            <label hidden="" id="paramFreqDelta"></label>
-                            <label hidden="" id="paramFreqStart"></label>
-                            <label hidden="" id="paramFramesPerTx"></label>
-                            <label hidden="" id="paramBytesPerTx"></label>
-                        </div>
-                        <div class="col-lg-4">
-                            <input type="range" min="1" max="100" value="10" class="slider" id="paramVolume" oninput="updateScroll('Volume');">
-                                                / <label id="paramVolumeScroll">Volume</label></td>
-                        
-                        </div>
-              </div>
-                     
-                    <div class="row">
-                      <div class="col-lg-4">
-                            <form id="fileInfo">
-                                Select file:
-                                <input type="file" id="fileInput" name="files">
-                            </form>
-                          </div>
-                          <div class="col-lg-4">
-                            <button onclick="lockoutSubmit(this); senderInit();">Broadcast</button>
-                          </div> 
-                          
-                      </div>
-                      <div class="row">
-                      <div class="col-lg-4">
-                            <a id="peer-info">No active peers</a>
-                        </div>
-                        <div class="col-lg-4">
-                            <a id="peer-receive"></a>
-                        </div> 
-                        <div class="col-lg-4">
-
-                        <div class="progress">
-                            <div class="label">Receive progress: </div>
-                            <progress id="receiveProgress" max="0" value="0"></progress>
-                        </div>
-                      </div>
-                      <div class="col-lg-4">
-
-                        <div class="progress">
-                          <div class="label">Send progress: </div>
-                          <progress id="sendProgress" max="0" value="0"></progress>
-                      </div>
-                    </div>
-                      </div>
-                      <div class="row">
-                            <div id="bitrate"></div>
-                      </div>
-                      <div class="row">
-                            <a id="download"></a>
-                      </div> 
-        
-                <span id="status"></span>
-                </div>
-                    <div class="component" style="display: none;" data-path-start="M280,466c0,0.13-0.001,0.26-0.003,0.39c-0.002,0.134-0.004,0.266-0.007,0.396
-        C279.572,482.992,266.307,496,250,496h-2.125H51.625H50c-16.316,0-29.592-13.029-29.99-29.249c-0.003-0.13-0.006-0.261-0.007-0.393
-        C20.001,466.239,20,466.119,20,466l0,0c0-0.141,0.001-0.281,0.003-0.422C20.228,449.206,33.573,436,50,436h1.625h196.25H250
-        c16.438,0,29.787,13.222,29.997,29.608C279.999,465.738,280,465.869,280,466L280,466z" data-path-listen="M181,466c0,0.13-0.001,0.26-0.003,0.39c-0.002,0.134-0.004,0.266-0.007,0.396
-        C180.572,482.992,167.307,496,151,496h-2.125h2.75H150c-16.316,0-29.592-13.029-29.99-29.249c-0.003-0.13-0.006-0.261-0.007-0.393
-        C120.001,466.239,120,466.119,120,466l0,0c0-0.141,0.001-0.281,0.003-0.422C120.228,449.206,133.573,436,150,436h1.625h-2.75H151
-        c16.438,0,29.787,13.222,29.997,29.608C180.999,465.738,181,465.869,181,466L181,466z" data-path-player="M290,40c0,0.13-0.001,380.26-0.003,380.39c-0.002,0.134,0.006,24.479,0.003,24.609 c0,3.095-2.562,5.001-5,5.001h-27.125H41.625H15c-1.875,0-5-1.25-5-5.001c-0.003-0.13,0.004-24.509,0.003-24.641 C10.001,420.239,10,40.119,10,40l0,0c0-0.141-0.002-24.859,0-25c0,0,0-5,5-5h26.625h216.25H285c2.438,0,5,1.906,5,5 C290.002,15.13,290,39.869,290,40L290,40z">
-                        <svg class="morpher" width="300" height="500">
-                            <path class="morph__button" d="M280,466c0,0.13-0.001,0.26-0.003,0.39c-0.002,0.134-0.004,0.266-0.007,0.396
-        C279.572,482.992,266.307,496,250,496h-2.125H51.625H50c-16.316,0-29.592-13.029-29.99-29.249c-0.003-0.13-0.006-0.261-0.007-0.393
-        C20.001,466.239,20,466.119,20,466l0,0c0-0.141,0.001-0.281,0.003-0.422C20.228,449.206,33.573,436,50,436h1.625h196.25H250
-        c16.438,0,29.787,13.222,29.997,29.608C279.999,465.738,280,465.869,280,466L280,466z"/>
-                        </svg>
-                        <button class="button button--start">
-                            <span class="button__content button__content--start">Listen to this song</span>
-                            <span class="button__content button__content--listen"><span class="icon icon--microphone"></span></span>
-                        </button>
-                        <div class="player player--hidden">
-                            <img class="player__cover" src="img/Gramatik.jpg" alt="Water 4 The Soul by Gramatik" />
-                            <div class="player__meta">
-                                <h3 class="player__track">Virtual Insight</h3>
-                                <h3 class="player__album">
-                                    <span class="player__album-name">Water 4 The Soul</span> by <span class="player__artist">Gramatik</span>
-                                </h3>
-                                <div class="player__controls">
-                                    <button class="player__control icon icon--skip-back" aria-label="Previous song"></button>
-                                    <button class="player__control player__control--play icon icon--play" aria-label="Play"></button>
-                                    <button class="player__control icon icon--skip-next" aria-label="Next song"></button>
-                                </div>
-                            </div>
-                            <button class="button button--close"><span class="icon icon--cross"></span></button>
-                        </div>
-                    </div>
-                </div> 
-  
-                <div style="display: none;">
-                  <p>Standard output:</p>
-          <textarea id="output" rows="8"></textarea>
-      
-          <div class="spinner" id="spinnerEm" style="display: none;"></div>
-          <div class="emscripten" id="statusEm"></div>
-      
-          <div class="emscripten">
-              <progress value="0" max="1" id="progressEm" hidden=""></progress>
-          </div>
-        </div>
-        </div>
-    </div>
-    <script type="text/javascript">
-        const tabs = document.querySelectorAll('[data-tab-value]')
-        const tabInfos = document.querySelectorAll('[data-tab-info]')
-  
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const target = document
-                    .querySelector(tab.dataset.tabValue);
-  
-                tabInfos.forEach(tabInfo => {
-                    tabInfo.classList.remove('active')
-                })
-                target.classList.add('active');
-            })
-        })
-    </script>
-    
-    
-  </div>
-  <div class="right-area">
-    <button class="btn-close-right">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-x-circle" viewBox="0 0 24 24">
-        <defs/>
-        <circle cx="12" cy="12" r="10"/>
-        <path d="M15 9l-6 6M9 9l6 6"/>
-      </svg>
-    </button>
-    <div class="right-area-header-wrapper">
-      <p class="right-area-header">Downloads</p>
-      <button class="more-action"></button>
-    </div>
-    <div class="download-item-line">
-      <div class="line-header">Today</div>
-      <div class="download-area">
-        <div class="download-item-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="">
-            <defs></defs>
-            <circle cx="256" cy="256" r="256" fill="#4b50dd"></circle>
-            <path fill="#f5f5f5" d="M192 64h176c4.4 0 8 3.6 8 8v328c0 4.4-3.6 8-8 8H120c-4.4 0-8-3.6-8-8V148l80-84z"></path>
-            <path fill="#e6e6e6" d="M184 148c4.4 0 8-3.6 8-8V64l-80 84h72z"></path>
-            <circle cx="352" cy="384" r="52" fill="#2179a6"></circle>
-            <g fill="#f5f5f5" class="g">
-              <path d="M352 416c-2.208 0-4-1.788-4-4v-56c0-2.212 1.792-4 4-4s4 1.788 4 4v56c0 2.212-1.792 4-4 4z"></path>
-              <path d="M352 416a3.989 3.989 0 01-2.828-1.172l-20-20c-1.564-1.564-1.564-4.092 0-5.656s4.092-1.564 5.656 0L352 406.344l17.172-17.172c1.564-1.564 4.092-1.564 5.656 0s1.564 4.092 0 5.656l-20 20A3.989 3.989 0 01352 416z"></path>
-            </g>
-          </svg>
-        </div>
-        <div class="download-item-texts">
-          <p class="download-text-header">Glitter.mp4</p>
-          <p class="download-text-info">34.45 MB<span>Waiting for download</span></p>
-        </div>
-        <div class="download-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612">
-            <defs/>
-            <path d="M403.939 295.749l-78.814 78.833V172.125c0-10.557-8.568-19.125-19.125-19.125s-19.125 8.568-19.125 19.125v202.457l-78.814-78.814c-7.478-7.478-19.584-7.478-27.043 0-7.478 7.478-7.478 19.584 0 27.042L289.208 431c4.59 4.59 10.863 6.005 16.812 4.953 5.929 1.052 12.221-.382 16.811-4.953l108.19-108.19c7.478-7.478 7.478-19.583 0-27.042-7.498-7.478-19.604-7.478-27.082-.019zM306 0C137.012 0 0 136.992 0 306s137.012 306 306 306 306-137.012 306-306S475.008 0 306 0zm0 573.75C158.125 573.75 38.25 453.875 38.25 306S158.125 38.25 306 38.25 573.75 158.125 573.75 306 453.875 573.75 306 573.75z"/>
-          </svg>
-        </div>
-      </div>
-    </div>
-    <div class="download-item-line">
-      <div class="line-header">Yesterday</div>
-      <div class="download-area">
-        <div class="download-item-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="">
-            <defs></defs>
-            <circle cx="256" cy="256" r="256" fill="#4bc0dd"></circle>
-            <path fill="#f5f5f5" d="M192 64h176c4.4 0 8 3.6 8 8v328c0 4.4-3.6 8-8 8H120c-4.4 0-8-3.6-8-8V148l80-84z"></path>
-            <path fill="#e6e6e6" d="M184 148c4.4 0 8-3.6 8-8V64l-80 84h72z"></path>
-            <circle cx="352" cy="384" r="52" fill="#2179a6"></circle>
-            <g fill="#f5f5f5" class="g">
-              <path d="M352 416c-2.208 0-4-1.788-4-4v-56c0-2.212 1.792-4 4-4s4 1.788 4 4v56c0 2.212-1.792 4-4 4z"></path>
-              <path d="M352 416a3.989 3.989 0 01-2.828-1.172l-20-20c-1.564-1.564-1.564-4.092 0-5.656s4.092-1.564 5.656 0L352 406.344l17.172-17.172c1.564-1.564 4.092-1.564 5.656 0s1.564 4.092 0 5.656l-20 20A3.989 3.989 0 01352 416z"></path>
-            </g>
-          </svg>
-        </div>
-        <div class="download-item-texts">
-          <p class="download-text-header">Glitter.mp4</p>
-          <div class="progress-bar">
-            <span class="progress"></span>
-          </div>
-        </div>
-        <div class="download-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="1 1 512 512">
-            <defs/>
-            <path d="M256 512C114.613 512 0 397.383 0 256S114.613 0 256 0s256 114.613 256 256c-.168 141.316-114.684 255.832-256 256zm0-480C132.29 32 32 132.29 32 256s100.29 224 224 224 224-100.29 224-224c-.133-123.656-100.344-223.867-224-224zm0 0"/>
-            <path d="M208 368c-8.836 0-16-7.164-16-16V160c0-8.836 7.164-16 16-16s16 7.164 16 16v192c0 8.836-7.164 16-16 16zm0 0M304 368c-8.836 0-16-7.164-16-16V160c0-8.836 7.164-16 16-16s16 7.164 16 16v192c0 8.836-7.164 16-16 16zm0 0"/>
-          </svg>
-        </div>
-      </div>
-    </div>
-    <div class="right-area-header-wrapper">
-      <p class="right-area-header">File Received</p>
-    </div>
-    <div class="received-item-line">
-      <div class="progress-line">
-        <span class="time start">15:30</span>
-        <span class="time end">18:30</span>
-      </div>
-      <div class="received-items-content">
-        <div class="received-files">
-          <div class="image-wrapper">
-          <img src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80"/>
-        </div>
-        <div class="image-wrapper">
-          <img src="https://images.unsplash.com/photo-1498855926480-d98e83099315?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"/>
-        </div>
-        <div class="image-wrapper">
-          <img src="https://images.unsplash.com/photo-1492648272180-61e45a8d98a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80"/>
-        </div>
-        </div>
-        <div class="received-files-info">
-          Received <span class="info-purple">3 images</span> total  <span class="info-purple">50.3 MB</span>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- Preloader -->
+<div class="preloader">
+  <div data-loader="dual-ring"></div>
 </div>
+<!-- Preloader End --> 
 
-<script type="text/javascript">
-  var bufferRx = null;
-  var brx = new Uint8Array(256);
-  var availableNetworks = [];
+<!-- Document Wrapper   
+=============================== -->
+<div id="main-wrapper">
+  <!-- Header
+  ============================ -->
+  <header id="header" class="sticky-top-slide"> 
+    <!-- Navbar -->
+    <nav class="primary-menu navbar navbar-expand-lg navbar-text-light bg-transparent navbar-line-under-text border-bottom-0 text-uppercase text-2 fw-600">
+      <div class="container-lg"> 
+        <!-- Logo --> 
+          <a class="logo" href="index.html" title="ShareX"> <p></p><h2 style="
+            color: white;
+            text-transform: lowercase;
+        ">Share</h2><h2 style="
+            font-size: 2.5em;
+            font-weight: revert;
+        ">X</h2><p></p> </a>  
+        <!-- Logo End -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#header-nav"><span></span><span></span><span></span></button>
+        <div id="header-nav" class="collapse navbar-collapse justify-content-end">
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link smooth-scroll active" href="#home">Home</a></li>
+            <li class="nav-item"><a class="nav-link smooth-scroll" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link smooth-scroll" href="#faq">Faq</a></li>
+            <li class="align-items-center h-auto ms-lg-3"><a href="https://soundx-code.github.io/app.html" class="nav-link btn btn-light link-dark rounded-pill fw-600 shadow-none d-inline-block mt-3 mt-lg-0 smooth-scroll">Try Demo</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar End --> 
+  </header>
+  <!-- Header End --> 
+  
+  <!-- Content
+  ============================================= -->
+  <div id="content" role="main"> 
+    
+    <!-- Intro
+    ============================================= -->
+    <section id="home">
+      <div class="hero-wrap">
+        <div class="hero-mask opacity-5 bg-primary"></div>
+        <div class="hero-bg parallax" style="background-image:url('images/intro-bg.jpg');"></div>
+        <div class="hero-content d-flex pt-5 fullscreen">
+          <div class="container my-auto pt-5">
+            <div class="row mt-5 mb-n5">
+              <div class="col-lg-12 align-self-center text-center">
+                <p class="text-white ls-4 text-uppercase">- The Next Big Thing -</p>
+                <h2 class="text-13 fw-600 text-white mb-3">ShareX</h2>
+                <p class="lead text-white mb-5">Serverless, Peer-to-Peer, File sharing through Sound Waves</p>
+                <img class="img-fluid" src="images/app-showcase.png" alt="" /> </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Intro end --> 
+    
+    <!-- About
+    ============================================= -->
+    <section id="about" class="section">
+      <div class="container pt-5">
+        <h2 class="text-9 fw-600 text-center">About ShareX Platform</h2>
+        <hr class="heading-separator-line bg-primary opacity-10 mx-auto">
+        <p class="lead text-center mb-4">You can present your app. It is all very easy!</p>
+        <div class="row">
+          <div class="col-lg-6 text-center"> <img class="img-fluid" src="images/about-app.png" alt="" /> </div>
+          <div class="col-lg-6 text-center text-lg-start">
+            <h2 class="text-6 mb-3 mt-4">Inspired Design for App Landing</h2>
+            <p>Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure. simply dummy text of the printing and typesetting industry quidam interesset his et.</p>
+            <p>Lorem Ipsum has been the industry's standard dummy text when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+            <div class="d-inline-flex pt-2"> <a class="me-4" href=""><img class="img-fluid" src="images/app-store.png" alt=""></a><a href=""><img class="img-fluid" src="images/google-play-store.png" alt=""></a> </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- About end --> 
+   <!-- How it works
+    ============================================= -->
+    <section id="how-it-works" class="hero-wrap section">
+      <div class="hero-mask opacity-7 bg-dark"></div>
+      <div class="hero-bg parallax" style="background-image:url('images/intro-bg-4.jpg');"></div>
+      <div class="hero-content">
+        <div class="container text-center">
+          <h2 class="text-9 fw-600 text-white mb-4 mb-lg-5">How it's Works? Play And Watch!</h2>
+          <a class="popup-youtube btn-video-play" href="#"><i class="fas fa-play"></i></a>
+          <p class="text-white font text-uppercase ls-1 mt-2 mb-0">View</p>
+        </div>
+      </div>
+    </section>
+    <!-- How it works end --> 
+    
+ 
+    <!-- Frequently asked questions
+    ============================================= -->
+    <section id="faq" class="section">
+      <div class="container">
+        <h2 class="text-9 fw-600 text-center">Frequently Asked Questions</h2>
+        <hr class="heading-separator-line bg-primary opacity-10 mx-auto">
+        <p class="lead text-center mb-4">You can present your app FAQ here!</p>
+        <div class="row">
+          <div class="col-md-10 col-lg-8 mx-auto">
+            <hr class="mb-0 opacity-1">
+            <div class="accordion accordion-flush arrow-end" id="faqTopics">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="true" aria-controls="flush-collapseOne">What is MXapp?</button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#faqTopics">
+                  <div class="accordion-body">Lisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure. Mutat tacimates id sit. Ridens mediocritatem ius an, eu nec magna imperdiet. Craft beer labore wes anderson cred nesciunt sapiente ea proident.</div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingTwo">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo"> How Can I Help You? </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#faqTopics">
+                  <div class="accordion-body">
+                    <p>Iisque Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.</p>
+                    <p class="mb-0">Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingThree">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">Is my data safe with App Showcase?</button>
+                </h2>
+                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#faqTopics">
+                  <div class="accordion-body"> Iisque persius interesset his et, in quot quidam persequeris vim, ad mea essent possim iriure. Mutat tacimates id sit. Ridens mediocritatem ius an, eu nec magna imperdiet. </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingFour">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseThree">How much fees does App Showcase?</button>
+                </h2>
+                <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#faqTopics">
+                  <div class="accordion-body"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingFive">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseThree">Why app showcase one page template?</button>
+                </h2>
+                <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#faqTopics">
+                  <div class="accordion-body"> <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus squid. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.</p>
+				  <p class="mb-0">Craft beer labore wes anderson cred nesciunt sapiente ea proident. Nihil anim keffiyeh helvetica, Ad vegan excepteur butcher vice lomo.</p> </div>
+                </div>
+              </div>
+            </div>
+            <hr class="mt-0 opacity-1">
+          </div>
+        </div>
+        <div class="lead text-center mt-4">Can't find it here? <a href="#contact" class="btn-link smooth-scroll">Tell us your query here.</a></div>
+      </div>
+    </section>
+    <!-- Frequently asked questions end --> 
+  
+  </div>
+  <!-- Content end --> 
+  
+  <!-- Footer
+  ============================================= -->
+  <footer id="footer" class="section bg-dark footer-text-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 align-self-center text-center text-lg-start">
+          <p class="mb-0">Â© 2022 <a href="#">ShareX</a>. All Rights Reserved.</p>
+        </div>
+        <div class="col-lg-4 align-self-center justify-content-center justify-content-lg-start">
+          <ul class="social-icons social-icons-lg social-icons-muted justify-content-center py-3 py-lg-0">
+            <li class="social-icons-twitter"><a data-bs-toggle="tooltip" href="#" target="_blank" title="" data-bs-original-title="Twitter"><i class="fab fa-twitter"></i></a></li>
+            <li class="social-icons-facebook"><a data-bs-toggle="tooltip" href="#" target="_blank" title="" data-bs-original-title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+            <li class="social-icons-linkedin"><a data-bs-toggle="tooltip" href="#" target="_blank" title="" data-bs-original-title="LinkedIn"><i class="fab fa-linkedin-in"></i></a></li>
+            <li class="social-icons-instagram"><a data-bs-toggle="tooltip" href="#" target="_blank" title="" data-bs-original-title="Instagram"><i class="fab fa-instagram"></i></a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 align-self-center">
+          <ul class="nav nav-separator nav-separator-light justify-content-center justify-content-lg-end">
+            <li class="nav-item"> <a class="nav-link" data-bs-toggle="modal" href="#">Terms of Use</a></li>
+            <li class="nav-item"> <a class="nav-link" data-bs-toggle="modal" href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Footer end --> 
+  
+</div>
+<!-- Document Wrapper end --> 
 
-  function lockoutSubmit(button) {
-      var oldValue = button.value;
+<!-- Back to Top
+============================================= --> 
+<a id="back-to-top" data-bs-toggle="tooltip" title="Back to Top" href="javascript:void(0)"><i class="fa fa-chevron-up"></i></a> 
 
-      button.setAttribute('disabled', true);
-      button.value = '...processing...';
-
-      setTimeout(function(){
-          button.value = oldValue;
-          button.removeAttribute('disabled');
-      }, 5000)
-  }
-
-  function selectConfig(configId) {
-      paramFreqDelta.value = 1;
-      paramFreqStart.value = 40;
-      paramFramesPerTx.value = 9;
-      paramBytesPerTx.value = 3;
-
-      if (configId == 1) {
-          paramFreqDelta.value = 1;
-          paramFreqStart.value = 40;
-          paramFramesPerTx.value = 6;
-          paramBytesPerTx.value = 3;
-      }
-
-      if (configId == 2) {
-          paramFreqDelta.value = 1;
-          paramFreqStart.value = 40;
-          paramFramesPerTx.value = 3;
-          paramBytesPerTx.value = 3;
-      }
-
-      if (configId == 3) {
-          paramFreqDelta.value = 1;
-          paramFreqStart.value = 320;
-          paramFramesPerTx.value = 9;
-          paramBytesPerTx.value = 3;
-      }
-
-      if (configId == 4) {
-          paramFreqDelta.value = 4;
-          paramFreqStart.value = 40;
-          paramFramesPerTx.value = 9;
-          paramBytesPerTx.value = 3;
-      }
-
-      if (configId == 5) {
-          paramFreqDelta.value = 2;
-          paramFreqStart.value = 40;
-          paramFramesPerTx.value = 18;
-          paramBytesPerTx.value = 6;
-      }
-
-      if (configId == 6) {
-          paramFreqDelta.value = 2;
-          paramFreqStart.value = 40;
-          paramFramesPerTx.value = 9;
-          paramBytesPerTx.value = 6;
-      }
-
-      if (configId == 7) {
-          paramFreqDelta.value = 4;
-          paramFreqStart.value = 320;
-          paramFramesPerTx.value = 9;
-          paramBytesPerTx.value = 3;
-      }
-
-      Module.cwrap('setTxMode','',['number'])(0); // Fixed length mode
-      Module.cwrap('setParameters','',['number','number','number','number','number','number','number'])(
-          paramFreqDelta.value,
-          paramFreqStart.value,
-          paramFramesPerTx.value,
-          paramBytesPerTx.value,
-          0,
-          paramVolume.value);
-  }
-
-  function updateScroll(sName) {
-      val = document.getElementById('param'+sName).value;
-      document.getElementById('param'+sName+'Scroll').innerHTML = val;
-
-      Module.cwrap('setParameters','',['number','number','number','number','number','number','number'])(
-          paramFreqDelta.value,
-          paramFreqStart.value,
-          paramFramesPerTx.value,
-          paramBytesPerTx.value,
-          0,
-          paramVolume.value);
-  }
-
-  function getSampleRate() {
-      if (typeof Module === 'undefined') return;
-      var sampleRate = Module.cwrap('getSampleRate', 'number', [''])();
-  }
-
-  var isiOS = /iPad|iPhone|iPod|CriOS/.test(navigator.userAgent) && !window.MSStream;
-  var isInitialized = false;
-  var isAudioContextUnlocked = !isiOS;
-
-  var htmlGreenLED  = "<div class=\"led-green\"></div>";
-  var htmlRedLED    = "<div class=\"led-red\"></div>";
-  var htmlYellowLED = "<div class=\"led-yellow\"></div>";
-
-  function checkStatus() {
-      var hasDeviceOutput = Module.cwrap('hasDeviceOutput', 'number', [''])();
-      {
-          var el = document.getElementById('has-device-output');
-          if (hasDeviceOutput != 0 && isAudioContextUnlocked) {
-              if (el.innerHTML != htmlGreenLED) {
-                  el.innerHTML = htmlGreenLED;
-              }
-          } else {
-              if (el.innerHTML != htmlRedLED) {
-                  el.innerHTML = htmlRedLED;
-              }
-          }
-      }
-
-      var hasDeviceCapture = Module.cwrap('hasDeviceCapture', 'number', [''])();
-      {
-          var el = document.getElementById('has-device-capture');
-          if (hasDeviceCapture != 0) {
-              if (el.innerHTML != htmlGreenLED) {
-                  el.innerHTML = htmlGreenLED;
-              }
-          } else {
-              if (el.innerHTML != htmlRedLED) {
-                  el.innerHTML = htmlRedLED;
-              }
-          }
-      }
-
-      var isBrowserSupported = !isiOS;
-      {
-          var el = document.getElementById('is-browser-supported');
-          if (isBrowserSupported) {
-              if (el.innerHTML != htmlGreenLED) {
-                  el.innerHTML = htmlGreenLED;
-              }
-          } else {
-              if (el.innerHTML != htmlYellowLED) {
-                  el.innerHTML = htmlYellowLED;
-              }
-          }
-      }
-
-      var isWebRTCSupported = availableNetworks.length;
-      {
-          var el = document.getElementById('is-webrtc-supported');
-          if (isWebRTCSupported) {
-              if (el.innerHTML != htmlGreenLED) {
-                  el.innerHTML = htmlGreenLED;
-              }
-          } else {
-              if (el.innerHTML != htmlYellowLED) {
-                  el.innerHTML = htmlYellowLED;
-              }
-          }
-      }
-  }
-
-  var statusElement = document.getElementById('statusEm');
-  var progressElement = document.getElementById('progressEm');
-  var spinnerElement = document.getElementById('spinnerEm');
-
-  var Module = {
-      doNotCaptureKeyboard: true,
-      pre: [],
-      preRun: [(function() {
-          let constraints = {
-              audio: {
-                  echoCancellation: false,
-                  autoGainControl: false,
-                  noiseSuppression: false
-              }
-          };
-
-          let mediaInput = navigator.mediaDevices.getUserMedia( constraints );
-      }) ],
-      // postRun: [ (function() { document.getElementById("butInit").disabled = false; }) ],
-      print: (function() {
-          var element = document.getElementById('output');
-          if (element) element.value = ''; // clear browser cache
-          return function(text) {
-              if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
-              console.log(text);
-              if (element) {
-                  element.value += text + "\n";
-                  element.scrollTop = element.scrollHeight; // focus on bottom
-              }
-          };
-      })(),
-      printErr: function(text) {
-          if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
-          console.error(text);
-      },
-      setStatus: function(text) {
-          if (!Module.setStatus.last) Module.setStatus.last = { time: Date.now(), text: '' };
-          if (text === Module.setStatus.text) return;
-          var m = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
-          var now = Date.now();
-          if (m && now - Date.now() < 30) return; // if this is a progress update, skip it if too soon
-          if (m) {
-              text = m[1];
-              progressElement.value = parseInt(m[2])*100;
-              progressElement.max = parseInt(m[4])*100;
-              progressElement.hidden = false;
-              spinnerElement.hidden = false;
-          } else {
-              progressElement.value = null;
-              progressElement.max = null;
-              progressElement.hidden = true;
-              if (!text) spinnerElement.style.display = 'none';
-          }
-          statusElement.innerHTML = text;
-      },
-      totalDependencies: 0,
-      monitorRunDependencies: function(left) {
-          this.totalDependencies = Math.max(this.totalDependencies, left);
-          Module.setStatus(left ? 'Preparing... (' + (this.totalDependencies-left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
-      }
-  };
-
-  function doInit() {
-    console.log('clicked');
-      if (isInitialized == false) {
-          Module.cwrap('doInit', 'number', [''])();
-
-          e = document.getElementById('waveConfig');
-          selectConfig(e.options[e.selectedIndex].value);
-
-          updateScroll('Volume');
-          bufferRx = Module._malloc(256);
-          setInterval(updatePeerInfo, 100);
-          setInterval(checkRxForPeerData, 1000);
-          setInterval(checkStatus, 1000);
-          getIPs(function(ip){
-              availableNetworks.push(ip);
-              var sel = document.getElementById('available-networks');
-              var opt = document.createElement("option");
-              opt.value = ip;
-              opt.text = ip;
-
-              sel.appendChild(opt);
-          });
-          isInitialized = true;
-      }
-
-      // playSound("./media/plucky");
-      var x = document.getElementById("main-controls");
-      // if (x.style.removeProperty) {
-      // x.style.removeProperty('display');
-      // } else {
-      //     x.style.removeAttribute('display');
-      // }
-      $('#init_button').fadeOut();
-      $('#main-controls').fadeIn();
-      document.getElementById("mobile-message").style.display = 'none';
-      // x.style.display = 'block';
-  }
-
-  Module.setStatus('Initializing...');
-  window.onerror = function(event) {
-      Module.setStatus('Exception thrown, see JavaScript console');
-      spinnerElement.style.display = 'none';
-      Module.setStatus = function(text) {
-          if (text) Module.printErr('[post-exception status] ' + text);
-      };
-  };
-
-  window.addEventListener('touchstart', function() {
-      if (isAudioContextUnlocked == false && SDL2.audioContext) {
-          var buffer = SDL2.audioContext.createBuffer(1, 1, 22050);
-          var source = SDL2.audioContext.createBufferSource();
-          source.buffer = buffer;
-          source.connect(SDL2.audioContext.destination);
-          source.start();
-
-          setTimeout(function() {
-              if((source.playbackState === source.PLAYING_STATE || source.playbackState === source.FINISHED_STATE)) {
-                  isAudioContextUnlocked = true;
-                  Module.setStatus('Wab Audio API unlocked successfully!');
-              } else {
-                  Module.setStatus('Failed to unlock Web Audio APIi. This browser seems to not be supported');
-              }
-          }, 0);
-      }
-  }, false);
-
-  function playSound(filename){
-     document.getElementById("sound").innerHTML='<audio id="soundInner"><source src="' + filename + '.mp3" type="audio/mpeg" /><embed hidden="true" autostart="true" loop="false" src="' + filename +'.mp3" /></audio>';
-     document.getElementById("soundInner").volume = paramVolume.value/100.0;
-     document.getElementById("soundInner").play();
-  }
-
-</script>
-<script async="" type="text/javascript" src="./wave.js"></script>
-<script type="text/javascript" src="./sdp-transform/grammar.js"></script>
-<script type="text/javascript" src="./sdp-transform/parser.js"></script>
-<script type="text/javascript" src="./sdp-transform/writer.js"></script>
-<script type="text/javascript" src="./main.js"></script>
-<script src="js/classie.js"></script>
-<script src="js/snap.svg-min.js"></script>
-<script src="js/main.js"></script>
-<script src="./js/index.js"></script>
-
-
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
-  (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-  m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-  (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-  ym(88021965, "init", {
-       clickmap:true,
-       trackLinks:true,
-       accurateTrackBounce:true,
-       webvisor:true
-  });
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/88021965" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-
+<!-- JavaScript --> 
+<script src="vendor/jquery/jquery.min.js"></script> 
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
+<!-- Easing --> 
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script> 
+<!-- Appear --> 
+<script src="vendor/jquery.appear/jquery.appear.min.js"></script> 
+<!-- Counter --> 
+<script src="vendor/jquery.countTo/jquery.countTo.min.js"></script> 
+<!-- Parallax Bg --> 
+<script src="vendor/parallaxie/parallaxie.min.js"></script> 
+<!-- Owl Carousel --> 
+<script src="vendor/owl.carousel/owl.carousel.min.js"></script> 
+<!-- Magnific Popup --> 
+<script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script> 
+<!-- Subscribe form --> 
+<script src="vendor/jquery-form/jquery.form.min.js"></script> 
+<script src="vendor/jquery-validation/jquery.validate.min.js"></script> 
+<!-- Style Switcher --> 
+<script src="js/switcher.min.js"></script> 
+<!-- Custom Script --> 
+<script src="js/theme.js"></script>
 </body>
 </html>
