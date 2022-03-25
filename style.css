@@ -658,7 +658,7 @@ a {
 .progress {
   height: 100%;
   width: 40%;
-  background-color: #4bc0dd;
+  /* background-color: #4bc0dd; */
   display: block;
 }
 
