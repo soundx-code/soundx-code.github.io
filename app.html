@@ -401,10 +401,10 @@
                 <div id="main-controls" style="display: none; padding: 5em;">
                   <div class="row">
                     
-                        <div class="col-lg-4">
+                        <div class="col-lg-6">
                             Local address: <select id="available-networks" name="available-networks"></select>
                           </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-6">
                             Sound:
                             <select id="waveConfig" onchange="selectConfig(this.value);" title="Before broadcast/receive make sure this is set to the same value for all peers">
                                 <option value="0">Normal</option>
@@ -418,25 +418,29 @@
                             <label hidden="" id="paramFramesPerTx"></label>
                             <label hidden="" id="paramBytesPerTx"></label>
                         </div>
-                        <div class="col-lg-4">
-                            Volume:
-                            <input type="range" min="1" max="100" value="10" class="slider" id="paramVolume" oninput="updateScroll('Volume');">
-                                                / <label id="paramVolumeScroll"></label></td>
                         
-                        </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  Volume:
+                  <input type="range" min="1" max="100" value="10" class="slider" id="paramVolume" oninput="updateScroll('Volume');">
+                                      / <label id="paramVolumeScroll"></label></td>
+              
+              </div>
               </div>
                      
                     <div class="row">
-                      <div class="col-lg-4">
+                      <div class="col-12">
                             <form id="fileInfo">
                                 Select file:
                                 <input type="file" id="fileInput" name="files">
                             </form>
                           </div>
-                          <div class="col-lg-4">
-                            <button onclick="lockoutSubmit(this); senderInit();">Broadcast</button>
-                          </div> 
-                          
+                      </div>
+                      <div class="row">
+                        <div class="col-12">
+                          <button class="btn" onclick="lockoutSubmit(this); senderInit();">Broadcast</button>
+                        </div> 
                       </div>
                       <div class="row">
                       <div class="col-lg-6">
